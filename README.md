@@ -1,6 +1,9 @@
 # Lama logger sdk
 
-##Testing
+---
+
+Testing
+--------
 
 ```
 python -m unittest test_logger.py
