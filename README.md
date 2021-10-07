@@ -6,6 +6,6 @@ Testing
 --------
 
 ```
-python -m unittest test_logger.py
+pytest -m "demo"
 ```
  

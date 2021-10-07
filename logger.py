@@ -1,18 +1,21 @@
 import json
+import os
 import threading
 
 import requests
 from requests import Response
 
 API_VERSION = 'v1'
+LOGGER_ENDPOINT = os.environ.get('LAMA_LOGGER_ENDPOINT', 'https://lama-logger.herokuapp.com')
 
 
 class LamaLogger:
-    api = f'https://lama-logger.herokuapp.com/api/{API_VERSION}'
+    endpoint = LOGGER_ENDPOINT
+    api = f'{LOGGER_ENDPOINT}/api/{API_VERSION}'
 
     def __init__(self, token, project_id):
         self._token = token
-        self._project_id = project_id
+        self.project_id = project_id
 
     def __call__(self, response: Response):
         thread = threading.Thread(target=self.__send_logs, args=(response,))
@@ -30,9 +33,10 @@ class LamaLogger:
         try:
             response_body = response.json()
         except json.decoder.JSONDecodeError:
-            response_body = str(response.content)
+            response_body = response.content.decode('utf-8')
 
         return {
+            'request_id': response.request_id,
             'method': response.request.method,
             'request_url': response.request.url,
             'request_headers': dict(response.request.headers),
@@ -45,7 +49,7 @@ class LamaLogger:
     def __send_logs(self, response: Response):
         payload = self.__to_payload(response)
         requests.post(
-            self.api + f'/projects/{self._project_id}/requests/',
+            self.api + f'/projects/{self.project_id}/requests/',
             data=json.dumps(payload),
             headers=self.__headers
         )
