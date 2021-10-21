@@ -36,20 +36,20 @@ class LamaLogger:
             response_body = response.content.decode('utf-8')
 
         return {
-            'request_id': response.request_id,
+            'requestId': response.request_id,
             'method': response.request.method,
-            'request_url': response.request.url,
-            'request_headers': dict(response.request.headers),
-            'request_body': response.request.body,
-            'response_code': response.status_code,
-            'response_body': json.dumps(response_body),
-            'response_headers': dict(response.headers),
+            'requestUrl': response.request.url,
+            'requestHeaders': dict(response.request.headers),
+            'requestBody': response.request.body,
+            'statusCode': response.status_code,
+            'responseBody': json.dumps(response_body),
+            'responseHeaders': dict(response.headers),
         }
 
     def __send_logs(self, response: Response):
         payload = self.__to_payload(response)
         requests.post(
-            self.api + f'/projects/{self.project_id}/requests/',
+            self.api + f'/projects/{self.project_id}/requests/create/',
             data=json.dumps(payload),
             headers=self.__headers
         )

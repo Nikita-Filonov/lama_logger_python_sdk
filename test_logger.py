@@ -7,9 +7,9 @@ from methods import get, post, patch, put, delete
 
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Token 3eaa763398f4a6d12d276d856e8c358991007cb7'
+    'Authorization': 'Token c239971892800c89a80170ee396687d485165b44'
 }
-endpoint = 'https://lama-logger.herokuapp.com/api/v1/projects/3/requests/'
+endpoint = 'http://localhost:8000/api/v1/projects/1/requests/'
 payload = json.dumps({'some': 'string'})
 
 

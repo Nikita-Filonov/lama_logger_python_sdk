@@ -5,7 +5,7 @@ import requests
 
 from logger import LamaLogger
 
-logger = LamaLogger(token='3eaa763398f4a6d12d276d856e8c358991007cb7', project_id=2)
+logger = LamaLogger(token='7be5c69f-e433-438b-8f6e-fcd7ca66a1ea', project_id=2)
 
 
 def link_pattern(request_id):
@@ -21,30 +21,30 @@ def response_middleware(response):
 
 
 def get(url, params=None, **kwargs):
-    response = requests.get(url, params=params, **kwargs)
+    response = requests.get(url, params=params, stream=True, **kwargs)
     response_middleware(response)
     return response
 
 
 def post(url, data=None, json=None, **kwargs):
-    response = requests.post(url, data=data, json=json, **kwargs)
+    response = requests.post(url, data=data, json=json, stream=True, **kwargs)
     response_middleware(response)
     return response
 
 
 def patch(url, data=None, **kwargs):
-    response = requests.patch(url, data=data, **kwargs)
+    response = requests.patch(url, data=data, stream=True, **kwargs)
     response_middleware(response)
     return response
 
 
 def put(url, data=None, **kwargs):
-    response = requests.put(url, data=data, **kwargs)
+    response = requests.put(url, data=data, stream=True, **kwargs)
     response_middleware(response)
     return response
 
 
 def delete(url, **kwargs):
-    response = requests.delete(url, **kwargs)
+    response = requests.delete(url, stream=True, **kwargs)
     response_middleware(response)
     return response
