@@ -5,7 +5,7 @@ import requests
 
 from logger import LamaLogger
 
-logger = LamaLogger(token='7be5c69f-e433-438b-8f6e-fcd7ca66a1ea', project_id=2)
+logger = LamaLogger(token='1ec4ebe3-24ff-4e3d-a750-feb53a5d647b', project_id=1)
 
 
 def link_pattern(request_id):
