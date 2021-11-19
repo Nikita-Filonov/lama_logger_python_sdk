@@ -7,15 +7,15 @@ from methods import get, post, patch, put, delete
 
 headers = {
     'Content-Type': 'application/json',
-    'Authorization': 'Token e1872b9d264446e77f7b7edbee42412e20fdf41a'
+    'Authorization': 'Token some token'
 }
-endpoint = 'https://lama-logger.herokuapp.com/api/v1/projects/1/requests/?hello=12345&hello2=123123'
+endpoint = 'http://localhost:8000/api/v1/projects/1/requests/?hello=12345&hello2=123123'
 payload = json.dumps({'some': 'string'})
 
 
 @pytest.mark.demo
 class TestRequests:
-    count = range(10)
+    count = range(5)
 
     @pytest.mark.chain
     @pytest.mark.parametrize('x', count)
